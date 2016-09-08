@@ -88,6 +88,7 @@ public class FullscreenActivity extends AppCompatActivity {
     ImageView red,blue;
     ImageView rock1,rock2,rock3;
     Button left,right;
+    Runnable move_right, move_left;
 
     public static boolean in(int low, int high, int n) {
         return n >= low && n <= high;
@@ -123,9 +124,6 @@ public class FullscreenActivity extends AppCompatActivity {
         int direction = step;
         @Override
         public void run() {
-            if (bounds(red,rock1))
-
-
             red.setX(red.getX()+direction);
             if (red.getX() <= 25) {
                 direction = -direction;
@@ -174,12 +172,21 @@ public class FullscreenActivity extends AppCompatActivity {
     }
 
     public void fall(ImageView rock) {
-        rock.setX(rock.getParent().getHeight());
+//        rock.setX(rock.getParent().getHeight());
     }
+
+    private Runnable gen_rock_move(final ImageView rock, final boolean right){
+        return new Runnable() {
+            public void run(){
+                int direction = right ? 10 : -10;
+            }
+        };
+    }
+
 
     public void R(View view) {
         handler.removeCallbacks(r1);
-        left.setEnabled(false);
+        left.setEnabled(false);/*
         ImageView[] rocks = new ImageView[] {rock1,rock2,rock3};
         for (final ImageView rock : rocks) {
             if (bounds(red,rock)) {
@@ -200,6 +207,13 @@ public class FullscreenActivity extends AppCompatActivity {
                     move.start();
             }
 
+        }*/
+        ImageView[] rocks = new ImageView[] {rock1,rock2,rock3};
+        for (ImageView rock : rocks) {
+            if (bounds(red, rock)) {
+                move_right = gen_rock_move(rock, true);
+                handler.postDelayed(move_right, calc_flight());
+            }
         }
         handler.post(r_hit);
     }
@@ -212,10 +226,6 @@ public class FullscreenActivity extends AppCompatActivity {
 
     public void onMyButtonClick(View view)
     {
-        // getX for collision
-        // think of precalculation
-        // ANDDDD
-        // is there a way to bypass constant array of wall and rock borders?
         handler = new Handler();
         handler.post(r1);
         handler.post(r2);
