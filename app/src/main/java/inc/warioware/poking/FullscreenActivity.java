@@ -3,10 +3,14 @@ package inc.warioware.poking;
 import android.animation.TimeInterpolator;
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
+import android.support.annotation.Dimension;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -89,6 +93,13 @@ public class FullscreenActivity extends AppCompatActivity {
     ImageView rock1,rock2,rock3;
     Button left,right;
 
+    int height;
+    int width;
+    int _speed;
+    DisplayMetrics metrics = new DisplayMetrics();
+
+
+
     public static boolean in(int low, int high, int n) {
         return n >= low && n <= high;
     }
@@ -98,22 +109,22 @@ public class FullscreenActivity extends AppCompatActivity {
         return ((pad.getY()-aHalf)>=rock.getBottom())&&((pad.getY()+aHalf)<=rock.getBottom()+rock.getHeight());
     }
 
-    final Runnable r1 = new Runnable() {
-        int direction = 2;
-        @Override
+     final Runnable r1 = new Runnable() {
+
+        public int direction = 15;
         public void run() {
             red.setY(red.getY()+direction);
-            if ((red.getY() >= 620) || (red.getY() <= 100))
+            if ((red.getY() >= (height - (height/10)) ) || (red.getY() <= height/10))
                 direction = -direction;
             handler.postDelayed(this, 5);
         }
     };
-    final Runnable r2 = new Runnable() {
-        int direction = -2;
+     final Runnable r2 = new Runnable() {
+        public int direction = -15;
         @Override
         public void run() {
             blue.setY(blue.getY()+direction);
-            if ((blue.getY() >= 620) || (blue.getY() <= 100))
+            if ((blue.getY() >= (height - (height/10))) || (blue.getY() <= height/10))
                 direction = -direction;
             handler.postDelayed(this, 5);
         }
@@ -147,7 +158,7 @@ public class FullscreenActivity extends AppCompatActivity {
 	      if (blue.getX() != 670) {
 **/
 
-    final int step = 2;
+    final int step = 3;
     final int speed = 5;
 
     final Runnable b_hit = new Runnable() {
@@ -174,13 +185,13 @@ public class FullscreenActivity extends AppCompatActivity {
     }
 
     public void fall(ImageView rock) {
-        rock.setX(rock.getParent().getHeight());
+//        rock.setX(rock.getParent().getHeight());
     }
 
     public void R(View view) {
         handler.removeCallbacks(r1);
         left.setEnabled(false);
-        ImageView[] rocks = new ImageView[] {rock1,rock2,rock3};
+  /*      ImageView[] rocks = new ImageView[] {rock1,rock2,rock3};
         for (final ImageView rock : rocks) {
             if (bounds(red,rock)) {
                 ObjectAnimator move = ObjectAnimator.ofFloat(rock, "translationX", +10f);
@@ -200,7 +211,7 @@ public class FullscreenActivity extends AppCompatActivity {
                     move.start();
             }
 
-        }
+        }*/
         handler.post(r_hit);
     }
 
@@ -216,9 +227,14 @@ public class FullscreenActivity extends AppCompatActivity {
         // think of precalculation
         // ANDDDD
         // is there a way to bypass constant array of wall and rock borders?
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        height = metrics.heightPixels;
+        width = metrics.widthPixels;
+
         handler = new Handler();
         handler.post(r1);
         handler.post(r2);
+
     }
 
 

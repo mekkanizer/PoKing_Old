@@ -58,22 +58,6 @@
             android:textDirection="anyRtl"
             android:text="abcde" />
 
-        <Button
-            android:layout_width="153dp"
-            android:layout_height="313dp"
-            android:id="@+id/l"
-            android:layout_gravity="left|bottom"
-            android:background="@android:color/transparent"
-            android:onClick="R" />
-
-        <Button
-            android:layout_width="153dp"
-            android:layout_height="313dp"
-            android:id="@+id/r"
-            android:layout_gravity="right|bottom"
-            android:background="@android:color/transparent"
-            android:onClick="B" />
-
         <ImageView
             android:layout_width="75dp"
             android:layout_height="10dp"
@@ -168,6 +152,22 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/predator"
             android:layout_marginLeft="30dp" />
+
+        <Button
+            android:layout_width="121dp"
+            android:layout_height="234dp"
+            android:id="@+id/l"
+            android:layout_gravity="left|center_vertical"
+            android:background="@android:color/transparent"
+            android:onClick="R" />
+
+        <Button
+            android:layout_width="121dp"
+            android:layout_height="234dp"
+            android:id="@+id/r"
+            android:layout_gravity="right|center_vertical"
+            android:background="@android:color/transparent"
+            android:onClick="B" />
 
 
     </FrameLayout>
