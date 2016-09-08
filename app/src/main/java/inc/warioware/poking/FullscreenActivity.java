@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.HashSet;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -92,6 +94,7 @@ public class FullscreenActivity extends AppCompatActivity {
     ImageView red,blue;
     ImageView rock1,rock2,rock3;
     Button left,right;
+    Runnable move_right, move_left;
 
     int height;
     int width;
@@ -104,9 +107,14 @@ public class FullscreenActivity extends AppCompatActivity {
         return n >= low && n <= high;
     }
 
-    public static boolean bounds (ImageView pad, ImageView rock) {
+    public static boolean boundsY (ImageView pad, ImageView rock) {
         float aHalf = pad.getHeight()/2;
         return ((pad.getY()-aHalf)>=rock.getBottom())&&((pad.getY()+aHalf)<=rock.getBottom()+rock.getHeight());
+    }
+
+    public static boolean boundsX (ImageView pad, ImageView rock) {
+        float aHalf = pad.getHeight()/2;
+        return ((pad.getX()-aHalf)>=rock.getLeft())&&((pad.getX()+aHalf)<=rock.getLeft()+rock.getWidth());
     }
 
      final Runnable r1 = new Runnable() {
@@ -131,14 +139,11 @@ public class FullscreenActivity extends AppCompatActivity {
     };
 
     final Runnable r_hit = new Runnable() {
-        int direction = step;
+        int direction = 15;
         @Override
         public void run() {
-            if (bounds(red,rock1))
-
-
             red.setX(red.getX()+direction);
-            if (red.getX() <= 25) {
+            if (red.getX() <= width/20) {
                 direction = -direction;
                 red.setX(red.getX()+direction);
                 handler.removeCallbacks(this);
@@ -146,10 +151,11 @@ public class FullscreenActivity extends AppCompatActivity {
                 handler.post(r1);
             }
             else
-                handler.postDelayed(this, speed);
+                handler.postDelayed(this, direction);
 
-            if ((red.getX() >= 460))// && (in()))
+            if ((red.getX()+red.getWidth()) >= width/2)
                 direction = -direction;
+
         }
     };
 
@@ -158,17 +164,15 @@ public class FullscreenActivity extends AppCompatActivity {
 	      if (blue.getX() != 670) {
 **/
 
-    final int step = 3;
+    final int step = 5;
     final int speed = 5;
 
     final Runnable b_hit = new Runnable() {
-        int direction = -step;
+        int direction = -15;
         @Override
         public void run() {
             blue.setX(blue.getX()+direction);
-            if ((blue.getX() <= 670))// && ())
-                direction = -direction;
-            if (blue.getX() >= 1100) {
+            if ((blue.getX()+blue.getWidth()) >= (width)) {
                 direction = -direction;
                 blue.setX(blue.getX()+direction);
                 handler.removeCallbacks(this);
@@ -176,7 +180,11 @@ public class FullscreenActivity extends AppCompatActivity {
                 handler.post(r2);
             }
             else
-                handler.postDelayed(this, speed);
+                handler.postDelayed(this, direction);
+
+            if ((blue.getX()) <= width/2)
+                direction = -direction;
+
         }
     };
 
@@ -186,12 +194,29 @@ public class FullscreenActivity extends AppCompatActivity {
 
     public void fall(ImageView rock) {
 //        rock.setX(rock.getParent().getHeight());
+//<<<<<<< HEAD
+//=======
     }
+
+    private Runnable gen_rock_move(final ImageView rock, final boolean right){
+        return new Runnable() {
+            public void run(){
+                int direction = right ? 10 : -10;
+            }
+        };
+//>>>>>>> origin/master
+    }
+
 
     public void R(View view) {
         handler.removeCallbacks(r1);
+//<<<<<<< HEAD
         left.setEnabled(false);
   /*      ImageView[] rocks = new ImageView[] {rock1,rock2,rock3};
+=======
+        left.setEnabled(false);/*
+        ImageView[] rocks = new ImageView[] {rock1,rock2,rock3};
+>>>>>>> origin/master
         for (final ImageView rock : rocks) {
             if (bounds(red,rock)) {
                 ObjectAnimator move = ObjectAnimator.ofFloat(rock, "translationX", +10f);
@@ -212,6 +237,10 @@ public class FullscreenActivity extends AppCompatActivity {
             }
 
         }*/
+//<<<<<<< HEAD
+//=======
+
+//>>>>>>> origin/master
         handler.post(r_hit);
     }
 
@@ -223,14 +252,15 @@ public class FullscreenActivity extends AppCompatActivity {
 
     public void onMyButtonClick(View view)
     {
+//<<<<<<< HEAD
         // getX for collision
         // think of precalculation
         // ANDDDD
         // is there a way to bypass constant array of wall and rock borders?
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        height = metrics.heightPixels;
-        width = metrics.widthPixels;
 
+
+//=======
+//>>>>>>> origin/master
         handler = new Handler();
         handler.post(r1);
         handler.post(r2);
@@ -241,6 +271,10 @@ public class FullscreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        height = metrics.heightPixels;
+        width = metrics.widthPixels;
 
         setContentView(R.layout.activity_fullscreen);
         // rotate the screen
@@ -253,8 +287,15 @@ public class FullscreenActivity extends AppCompatActivity {
         rock1 = (ImageView)findViewById(R.id.rock1);
         rock2 = (ImageView)findViewById(R.id.rock2);
         rock3 = (ImageView)findViewById(R.id.rock3);
+
+
         red = (ImageView)findViewById(R.id.imageView);
         blue = (ImageView)findViewById(R.id.imageView2);
+
+        red.setX(width/50);
+        blue.setX(width/30);
+
+
         left = (Button)findViewById(R.id.l);
         right = (Button)findViewById(R.id.r);
 

@@ -25,7 +25,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:fitsSystemWindows="true"
-        android:background="@drawable/background_fill">
+        android:background="@drawable/background_fill"
+        android:layout_gravity="center">
 
         <LinearLayout
             android:id="@+id/fullscreen_content_controls"
@@ -74,26 +75,11 @@
             android:layout_marginRight="25dp"
             android:background="#6969ff" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start"
-            android:id="@+id/start_button"
-            android:layout_gravity="center_horizontal|top"
-            android:onClick="onMyButtonClick" />
-
         <ImageView
             android:layout_width="30dp"
             android:layout_height="105dp"
             android:id="@+id/upperWall"
             android:layout_gravity="center_horizontal|top"
-            android:background="#502929" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="105dp"
-            android:id="@+id/lowerWall"
-            android:layout_gravity="center_horizontal|bottom"
             android:background="#502929" />
 
         <ImageView
@@ -159,7 +145,11 @@
             android:id="@+id/l"
             android:layout_gravity="left|center_vertical"
             android:background="@android:color/transparent"
-            android:onClick="R" />
+            android:onClick="R"
+            android:alpha="0"
+            android:enabled="true"
+            android:allowUndo="false"
+            android:clickable="true" />
 
         <Button
             android:layout_width="121dp"
@@ -167,7 +157,24 @@
             android:id="@+id/r"
             android:layout_gravity="right|center_vertical"
             android:background="@android:color/transparent"
-            android:onClick="B" />
+            android:onClick="B"
+            android:enabled="true"
+            android:clickable="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:id="@+id/start_button"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="onMyButtonClick" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="105dp"
+            android:id="@+id/lowerWall"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="#502929" />
 
 
     </FrameLayout>
