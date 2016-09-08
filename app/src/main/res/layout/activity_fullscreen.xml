@@ -1,0 +1,175 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context="inc.warioware.poking.FullscreenActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <TextView
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:text="@string/dummy_content"
+        android:textColor="#33b5e5"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/background_fill">
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@color/black_overlay"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="hbhjbjhbh"
+            android:id="@+id/textView"
+            android:layout_gravity="left|top"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textView2"
+            android:layout_gravity="right|top"
+            android:textColor="@android:color/black"
+            android:textDirection="anyRtl"
+            android:text="abcde" />
+
+        <Button
+            android:layout_width="153dp"
+            android:layout_height="313dp"
+            android:id="@+id/l"
+            android:layout_gravity="left|bottom"
+            android:background="@android:color/transparent"
+            android:onClick="R" />
+
+        <Button
+            android:layout_width="153dp"
+            android:layout_height="313dp"
+            android:id="@+id/r"
+            android:layout_gravity="right|bottom"
+            android:background="@android:color/transparent"
+            android:onClick="B" />
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="10dp"
+            android:id="@+id/imageView"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="25dp"
+            android:background="#ff6969" />
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="10dp"
+            android:id="@+id/imageView2"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="25dp"
+            android:background="#6969ff" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:id="@+id/start_button"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="onMyButtonClick" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="105dp"
+            android:id="@+id/upperWall"
+            android:layout_gravity="center_horizontal|top"
+            android:background="#502929" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="105dp"
+            android:id="@+id/lowerWall"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="#502929" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/rock1"
+            android:layout_gravity="center"
+            android:background="#785500"
+            android:layout_marginBottom="60dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/rock2"
+            android:layout_gravity="center"
+            android:background="#785500" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/rock3"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:background="#785500" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/midWall1"
+            android:layout_gravity="center"
+            android:background="#502929"
+            android:layout_marginBottom="30dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/midWall2"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="#502929" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player1"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/alien" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/predator"
+            android:layout_marginLeft="30dp" />
+
+
+    </FrameLayout>
+
+</FrameLayout>
