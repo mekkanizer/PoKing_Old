@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.graphics.Rect;
 import android.widget.Toast;
 
 import java.util.HashSet;
@@ -92,9 +93,9 @@ public class FullscreenActivity extends AppCompatActivity {
     //Toast.makeText(this, "Зачем вы нажали?", Toast.LENGTH_SHORT).show();
 
     ImageView red,blue;
-    ImageView rock1,rock2,rock3;
+    ImageView[] rocks, players, hittable;
     Button left,right;
-    Runnable move_right, move_left;
+    Runnable move_rock;
 
     int height;
     int width;
@@ -107,22 +108,17 @@ public class FullscreenActivity extends AppCompatActivity {
         return n >= low && n <= high;
     }
 
-    public static boolean boundsY (ImageView pad, ImageView rock) {
+    public static boolean boundsY (ImageView pad, ImageView obj) {
         float aHalf = pad.getHeight()/2;
-        return ((pad.getY()-aHalf)>=rock.getBottom())&&((pad.getY()+aHalf)<=rock.getBottom()+rock.getHeight());
-    }
-
-    public static boolean boundsX (ImageView pad, ImageView rock) {
-        float aHalf = pad.getHeight()/2;
-        return ((pad.getX()-aHalf)>=rock.getLeft())&&((pad.getX()+aHalf)<=rock.getLeft()+rock.getWidth());
+        return ((pad.getY()-aHalf)>=obj.getBottom())&&((pad.getY()+aHalf)<=obj.getBottom()+obj.getHeight());
     }
 
      final Runnable r1 = new Runnable() {
 
         public int direction = 15;
         public void run() {
-            red.setY(red.getY()+direction);
-            if ((red.getY() >= (height - (height/10)) ) || (red.getY() <= height/10))
+            players[0].setY(players[0].getY()+direction);
+            if ((players[0].getY() >= (height - (height/10)) ) || (players[0].getY() <= height/10))
                 direction = -direction;
             handler.postDelayed(this, 5);
         }
@@ -131,8 +127,8 @@ public class FullscreenActivity extends AppCompatActivity {
         public int direction = -15;
         @Override
         public void run() {
-            blue.setY(blue.getY()+direction);
-            if ((blue.getY() >= (height - (height/10))) || (blue.getY() <= height/10))
+            players[1].setY(players[1].getY()+direction);
+            if ((players[1].getY() >= (height - (height/10))) || (players[1].getY() <= height/10))
                 direction = -direction;
             handler.postDelayed(this, 5);
         }
@@ -140,20 +136,25 @@ public class FullscreenActivity extends AppCompatActivity {
 
     final Runnable r_hit = new Runnable() {
         int direction = 15;
+        float hit_point = 0;
         @Override
         public void run() {
-            red.setX(red.getX()+direction);
-            if (red.getX() <= width/20) {
+            if (hit_point == 0) {
+                for (ImageView obj : hittable)
+                    if (boundsY(players[0], obj))
+                        hit_point = obj.getX();
+            }
+            players[0].setX(players[0].getX()+direction);
+            if (players[0].getX() <= width/20) {
                 direction = -direction;
-                red.setX(red.getX()+direction);
+                players[0].setX(players[0].getX()+direction);
                 handler.removeCallbacks(this);
                 left.setEnabled(true);
                 handler.post(r1);
             }
             else
                 handler.postDelayed(this, direction);
-
-            if ((red.getX()+red.getWidth()) >= width/2)
+            if ((players[0].getX()+players[0].getWidth()) >= hit_point)
                 direction = -direction;
 
         }
@@ -164,6 +165,23 @@ public class FullscreenActivity extends AppCompatActivity {
 	      if (blue.getX() != 670) {
 **/
 
+    final Runnable rock_check = new Runnable() {
+        @Override
+        public void run() {
+            Rect rect1 = new Rect();
+            Rect rect2 = new Rect();
+            for (ImageView rock : rocks) {
+                rock.getDrawingRect(rect1);
+                for (ImageView p : players) {
+                    p.getDrawingRect(rect2);
+                    if (Rect.intersects(rect1, rect2))
+                        handler.post(gen_rock_move(rock, (p == red)));
+                }
+            }
+            // re-post this runnable
+        }
+    };
+
     final int step = 5;
     final int speed = 5;
 
@@ -171,10 +189,10 @@ public class FullscreenActivity extends AppCompatActivity {
         int direction = -15;
         @Override
         public void run() {
-            blue.setX(blue.getX()+direction);
-            if ((blue.getX()+blue.getWidth()) >= (width)) {
+            players[1].setX(players[1].getX()+direction);
+            if ((players[1].getX()+players[1].getWidth()) >= (width)-25) {
                 direction = -direction;
-                blue.setX(blue.getX()+direction);
+                players[1].setX(players[1].getX()+direction);
                 handler.removeCallbacks(this);
                 right.setEnabled(true);
                 handler.post(r2);
@@ -182,41 +200,44 @@ public class FullscreenActivity extends AppCompatActivity {
             else
                 handler.postDelayed(this, direction);
 
-            if ((blue.getX()) <= width/2)
+            if ((players[1].getX()) <= width/2)
                 direction = -direction;
 
         }
     };
 
-    public int calc_flight() {
-        return step * speed;
-    }
-
-    public void fall(ImageView rock) {
-//        rock.setX(rock.getParent().getHeight());
-//<<<<<<< HEAD
-//=======
-    }
-
     private Runnable gen_rock_move(final ImageView rock, final boolean right){
         return new Runnable() {
             public void run(){
                 int direction = right ? 10 : -10;
+                rock.setX(rock.getX()+direction);
+                float cheto = rock.getX();
+                int chetoesche = width/2-rock.getWidth();
+                if (rock.getX() == width/2-rock.getWidth())
+                    handler = new Handler();
+
+                if ((rock.getX()+rock.getWidth()) >= (width)-25) {
+                    direction = -direction;
+                    rock.setX(rock.getX()+direction);
+                    handler.removeCallbacks(this);
+                    handler.post(r2);
+                }
+                else
+                    handler.postDelayed(this, direction);
+
+                if ((rock.getX()) <= width/2)
+                    direction = -direction;
             }
         };
-//>>>>>>> origin/master
     }
 
 
     public void R(View view) {
         handler.removeCallbacks(r1);
-//<<<<<<< HEAD
         left.setEnabled(false);
   /*      ImageView[] rocks = new ImageView[] {rock1,rock2,rock3};
-=======
         left.setEnabled(false);/*
         ImageView[] rocks = new ImageView[] {rock1,rock2,rock3};
->>>>>>> origin/master
         for (final ImageView rock : rocks) {
             if (bounds(red,rock)) {
                 ObjectAnimator move = ObjectAnimator.ofFloat(rock, "translationX", +10f);
@@ -237,10 +258,6 @@ public class FullscreenActivity extends AppCompatActivity {
             }
 
         }*/
-//<<<<<<< HEAD
-//=======
-
-//>>>>>>> origin/master
         handler.post(r_hit);
     }
 
@@ -250,21 +267,15 @@ public class FullscreenActivity extends AppCompatActivity {
         handler.post(b_hit);
     }
 
-    public void onMyButtonClick(View view)
+    public void onStartButtonClick(View view)
     {
-//<<<<<<< HEAD
-        // getX for collision
-        // think of precalculation
-        // ANDDDD
-        // is there a way to bypass constant array of wall and rock borders?
-
-
-//=======
-//>>>>>>> origin/master
-        handler = new Handler();
+        Button start_b = (Button)findViewById(R.id.start_button);
+        start_b.setEnabled(false);
+        right.setEnabled(true);
+        left.setEnabled(true);
         handler.post(r1);
         handler.post(r2);
-
+        handler.post(rock_check);
     }
 
 
@@ -273,8 +284,8 @@ public class FullscreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        height = metrics.heightPixels;
-        width = metrics.widthPixels;
+        width = metrics.heightPixels;
+        height = metrics.widthPixels;
 
         setContentView(R.layout.activity_fullscreen);
         // rotate the screen
@@ -283,17 +294,33 @@ public class FullscreenActivity extends AppCompatActivity {
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
+        
+        rocks = new ImageView[] {
+            (ImageView)findViewById(R.id.rock1), 
+            (ImageView)findViewById(R.id.rock2),
+            (ImageView)findViewById(R.id.rock3)
+        };
+        
+        players = new ImageView[] {
+            (ImageView)findViewById(R.id.imageView),
+            (ImageView)findViewById(R.id.imageView2)
+        };
 
-        rock1 = (ImageView)findViewById(R.id.rock1);
-        rock2 = (ImageView)findViewById(R.id.rock2);
-        rock3 = (ImageView)findViewById(R.id.rock3);
+        hittable = new ImageView[] {
+            (ImageView)findViewById(R.id.upperWall),
+            (ImageView)findViewById(R.id.midWall1),
+            (ImageView)findViewById(R.id.midWall2),
+            (ImageView)findViewById(R.id.lowerWall),
+            (ImageView)findViewById(R.id.rock1),
+            (ImageView)findViewById(R.id.rock2),
+            (ImageView)findViewById(R.id.rock3)
+        };
 
+        handler = new Handler();
+        gen_rock_move(rocks[0],true);
 
-        red = (ImageView)findViewById(R.id.imageView);
-        blue = (ImageView)findViewById(R.id.imageView2);
-
-        red.setX(width/50);
-        blue.setX(width/30);
+        players[0].setX(width/50);
+        players[1].setX(width/30);
 
 
         left = (Button)findViewById(R.id.l);

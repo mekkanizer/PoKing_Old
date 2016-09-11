@@ -26,7 +26,7 @@
         android:layout_height="fill_parent"
         android:fitsSystemWindows="true"
         android:background="@drawable/background_fill"
-        android:layout_gravity="center">
+        android:layout_gravity="center_horizontal|top">
 
         <LinearLayout
             android:id="@+id/fullscreen_content_controls"
@@ -72,7 +72,7 @@
             android:layout_height="10dp"
             android:id="@+id/imageView2"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="25dp"
+            android:layout_marginRight="50dp"
             android:background="#6969ff" />
 
         <ImageView
@@ -147,7 +147,7 @@
             android:background="@android:color/transparent"
             android:onClick="R"
             android:alpha="0"
-            android:enabled="true"
+            android:enabled="false"
             android:allowUndo="false"
             android:clickable="true" />
 
@@ -158,7 +158,7 @@
             android:layout_gravity="right|center_vertical"
             android:background="@android:color/transparent"
             android:onClick="B"
-            android:enabled="true"
+            android:enabled="false"
             android:clickable="true" />
 
         <Button
@@ -167,11 +167,11 @@
             android:text="Start"
             android:id="@+id/start_button"
             android:layout_gravity="center_horizontal|top"
-            android:onClick="onMyButtonClick" />
+            android:onClick="onStartButtonClick" />
 
         <ImageView
             android:layout_width="30dp"
-            android:layout_height="105dp"
+            android:layout_height="93dp"
             android:id="@+id/lowerWall"
             android:layout_gravity="center_horizontal|bottom"
             android:background="#502929" />
