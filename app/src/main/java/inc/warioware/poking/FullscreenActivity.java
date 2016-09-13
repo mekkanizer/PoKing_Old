@@ -93,7 +93,7 @@ public class FullscreenActivity extends AppCompatActivity {
     //Toast.makeText(this, "Зачем вы нажали?", Toast.LENGTH_SHORT).show();
 
     ImageView red,blue;
-    ImageView[] rocks, players, hittable;
+    ImageView[] rocks, players, walls;
     Button left,right;
     Runnable move_rock;
 
@@ -111,6 +111,20 @@ public class FullscreenActivity extends AppCompatActivity {
     public static boolean boundsY (ImageView pad, ImageView obj) {
         float aHalf = pad.getHeight()/2;
         return ((pad.getY()-aHalf)>=obj.getBottom())&&((pad.getY()+aHalf)<=obj.getBottom()+obj.getHeight());
+    }
+
+    public float getHitPoint (ImageView pad) {
+        float hit_point = 0;
+        for (ImageView rock : rocks)
+            if (boundsY(pad, rock))
+                hit_point = rock.getX();
+        if (hit_point == 0)
+            for (ImageView wall : walls)
+                if (boundsY(pad, wall))
+                    hit_point = wall.getX();
+        else
+            hit_point += 10;
+        return hit_point;
     }
 
      final Runnable r1 = new Runnable() {
@@ -139,11 +153,8 @@ public class FullscreenActivity extends AppCompatActivity {
         float hit_point = 0;
         @Override
         public void run() {
-            if (hit_point == 0) {
-                for (ImageView obj : hittable)
-                    if (boundsY(players[0], obj))
-                        hit_point = obj.getX();
-            }
+            if (hit_point == 0)
+                hit_point = getHitPoint(players[0]);
             players[0].setX(players[0].getX()+direction);
             if (players[0].getX() <= width/20) {
                 direction = -direction;
@@ -160,10 +171,29 @@ public class FullscreenActivity extends AppCompatActivity {
         }
     };
 
-    /*
-    * if (red.getX() == 460)
-	      if (blue.getX() != 670) {
-**/
+    final Runnable b_hit = new Runnable() {
+        int direction = -15;
+        float hit_point = 0;
+        @Override
+        public void run() {
+            if (hit_point == 0)
+                hit_point = getHitPoint(players[0]);
+            players[1].setX(players[1].getX()+direction);
+            if ((players[1].getX()+players[1].getWidth()) >= (width)-25) {
+                direction = -direction;
+                players[1].setX(players[1].getX()+direction);
+                handler.removeCallbacks(this);
+                right.setEnabled(true);
+                handler.post(r2);
+            }
+            else
+                handler.postDelayed(this, direction);
+
+            if ((players[1].getX()) <= hit_point)
+                direction = -direction;
+
+        }
+    };
 
     final Runnable rock_check = new Runnable() {
         @Override
@@ -182,39 +212,25 @@ public class FullscreenActivity extends AppCompatActivity {
         }
     };
 
-    final int step = 5;
-    final int speed = 5;
-
-    final Runnable b_hit = new Runnable() {
-        int direction = -15;
-        @Override
-        public void run() {
-            players[1].setX(players[1].getX()+direction);
-            if ((players[1].getX()+players[1].getWidth()) >= (width)-25) {
-                direction = -direction;
-                players[1].setX(players[1].getX()+direction);
-                handler.removeCallbacks(this);
-                right.setEnabled(true);
-                handler.post(r2);
-            }
-            else
-                handler.postDelayed(this, direction);
-
-            if ((players[1].getX()) <= width/2)
-                direction = -direction;
-
-        }
-    };
-
     private Runnable gen_rock_move(final ImageView rock, final boolean right){
         return new Runnable() {
             public void run(){
                 int direction = right ? 10 : -10;
                 rock.setX(rock.getX()+direction);
+
                 float cheto = rock.getX();
                 int chetoesche = width/2-rock.getWidth();
+
                 if (rock.getX() == width/2-rock.getWidth())
-                    handler = new Handler();
+                    /*             МОМЕНТ ПАДЕНИЯ
+                    * move.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(ObjectAnimator animation) {
+                        super.onAnimationEnd(animation);
+                        fall(rock);
+                    }
+
+                });*/
 
                 if ((rock.getX()+rock.getWidth()) >= (width)-25) {
                     direction = -direction;
@@ -306,14 +322,11 @@ public class FullscreenActivity extends AppCompatActivity {
             (ImageView)findViewById(R.id.imageView2)
         };
 
-        hittable = new ImageView[] {
+        walls = new ImageView[] {
             (ImageView)findViewById(R.id.upperWall),
             (ImageView)findViewById(R.id.midWall1),
             (ImageView)findViewById(R.id.midWall2),
-            (ImageView)findViewById(R.id.lowerWall),
-            (ImageView)findViewById(R.id.rock1),
-            (ImageView)findViewById(R.id.rock2),
-            (ImageView)findViewById(R.id.rock3)
+            (ImageView)findViewById(R.id.lowerWall)
         };
 
         handler = new Handler();
