@@ -5,6 +5,7 @@
       <config>
         <devices>
           <device id="Galaxy Nexus" />
+          <device id="Nexus 7" />
         </devices>
       </config>
     </shared>
@@ -24,6 +25,8 @@
     <list default="true" id="c6e0b317-3160-4f92-8780-a24f6a03f5b2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/inc/warioware/poking/FullscreenActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/inc/warioware/poking/FullscreenActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_fullscreen.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_fullscreen.xml" />
     </list>
     <ignored path="PoKing.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,11 +50,42 @@
       <file leaf-file-name="FullscreenActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/inc/warioware/poking/FullscreenActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3253012">
-              <caret line="230" column="21" selection-start-line="230" selection-start-column="21" selection-end-line="230" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.82481754">
+              <caret line="185" column="40" selection-start-line="185" selection-start-column="40" selection-end-line="185" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="class#4172:4504" expanded="false" />
+                <element signature="class#4535:4884" expanded="false" />
+                <element signature="e#6520#7047#0" expanded="true" />
+                <element signature="e#7046#7047#0" expanded="true" />
+                <element signature="e#7115#7297#0" expanded="true" />
+                <element signature="e#7296#7297#0" expanded="true" />
+                <element signature="e#7821#8527#0" expanded="true" />
+                <element signature="e#8526#8527#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Handler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Android/Sdk/sources/android-24/android/os/Handler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="92" column="16" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
+              <folding>
+                <element signature="e#30052#30053#0" expanded="true" />
+                <element signature="e#30090#30091#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Looper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Android/Sdk/sources/android-24/android/os/Looper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="122" column="23" selection-start-line="122" selection-start-column="23" selection-end-line="122" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -2040,6 +2074,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -2062,7 +2099,13 @@
       <option name="project" value="LOCAL" />
       <updated>1473803380841</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="gethitpoint()">
+      <created>1473803405263</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1473803405263</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2075,7 +2118,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32905483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32905483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32982457" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2085,7 +2128,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24926254" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2496329" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24926254" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3990665" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2116,17 +2159,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/inc/warioware/poking/FullscreenActivity.java</url>
-          <line>221</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="3" />
+      <option name="time" value="5" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="app">
+        <watch expression="rock.getWidth()" language="JAVA" custom="" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/inc/warioware/poking/FullscreenActivity.java">
@@ -2135,6 +2174,14 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#4172:4504" expanded="false" />
+            <element signature="class#4535:4884" expanded="false" />
+            <element signature="e#6520#7047#0" expanded="true" />
+            <element signature="e#7046#7047#0" expanded="true" />
+            <element signature="e#7115#7297#0" expanded="true" />
+            <element signature="e#7296#7297#0" expanded="true" />
+            <element signature="e#7821#8527#0" expanded="true" />
+            <element signature="e#8526#8527#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2156,6 +2203,14 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#4172:4504" expanded="false" />
+            <element signature="class#4535:4884" expanded="false" />
+            <element signature="e#6520#7047#0" expanded="true" />
+            <element signature="e#7046#7047#0" expanded="true" />
+            <element signature="e#7115#7297#0" expanded="true" />
+            <element signature="e#7296#7297#0" expanded="true" />
+            <element signature="e#7821#8527#0" expanded="true" />
+            <element signature="e#8526#8527#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2177,6 +2232,14 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#4172:4504" expanded="false" />
+            <element signature="class#4535:4884" expanded="false" />
+            <element signature="e#6520#7047#0" expanded="true" />
+            <element signature="e#7046#7047#0" expanded="true" />
+            <element signature="e#7115#7297#0" expanded="true" />
+            <element signature="e#7296#7297#0" expanded="true" />
+            <element signature="e#7821#8527#0" expanded="true" />
+            <element signature="e#8526#8527#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2198,6 +2261,14 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#4172:4504" expanded="false" />
+            <element signature="class#4535:4884" expanded="false" />
+            <element signature="e#6520#7047#0" expanded="true" />
+            <element signature="e#7046#7047#0" expanded="true" />
+            <element signature="e#7115#7297#0" expanded="true" />
+            <element signature="e#7296#7297#0" expanded="true" />
+            <element signature="e#7821#8527#0" expanded="true" />
+            <element signature="e#8526#8527#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2219,6 +2290,14 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#4172:4504" expanded="false" />
+            <element signature="class#4535:4884" expanded="false" />
+            <element signature="e#6520#7047#0" expanded="true" />
+            <element signature="e#7046#7047#0" expanded="true" />
+            <element signature="e#7115#7297#0" expanded="true" />
+            <element signature="e#7296#7297#0" expanded="true" />
+            <element signature="e#7821#8527#0" expanded="true" />
+            <element signature="e#8526#8527#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2240,6 +2319,14 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#4172:4504" expanded="false" />
+            <element signature="class#4535:4884" expanded="false" />
+            <element signature="e#6520#7047#0" expanded="true" />
+            <element signature="e#7046#7047#0" expanded="true" />
+            <element signature="e#7115#7297#0" expanded="true" />
+            <element signature="e#7296#7297#0" expanded="true" />
+            <element signature="e#7821#8527#0" expanded="true" />
+            <element signature="e#8526#8527#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2255,12 +2342,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Android/Sdk/sources/android-24/android/os/Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="92" column="16" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
+          <folding>
+            <element signature="e#30052#30053#0" expanded="true" />
+            <element signature="e#30090#30091#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Android/Sdk/sources/android-24/android/os/Looper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="122" column="23" selection-start-line="122" selection-start-column="23" selection-end-line="122" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/inc/warioware/poking/FullscreenActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3253012">
-          <caret line="230" column="21" selection-start-line="230" selection-start-column="21" selection-end-line="230" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.82481754">
+          <caret line="185" column="40" selection-start-line="185" selection-start-column="40" selection-end-line="185" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#4172:4504" expanded="false" />
+            <element signature="class#4535:4884" expanded="false" />
+            <element signature="e#6520#7047#0" expanded="true" />
+            <element signature="e#7046#7047#0" expanded="true" />
+            <element signature="e#7115#7297#0" expanded="true" />
+            <element signature="e#7296#7297#0" expanded="true" />
+            <element signature="e#7821#8527#0" expanded="true" />
+            <element signature="e#8526#8527#0" expanded="true" />
           </folding>
         </state>
       </provider>

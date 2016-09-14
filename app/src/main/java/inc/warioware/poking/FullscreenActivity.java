@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.graphics.Rect;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashSet;
@@ -92,21 +93,15 @@ public class FullscreenActivity extends AppCompatActivity {
     // выводим сообщение
     //Toast.makeText(this, "Зачем вы нажали?", Toast.LENGTH_SHORT).show();
 
-    ImageView red,blue;
     ImageView[] rocks, players, walls;
+    TextView board1, board2;
     Button left,right;
-    Runnable move_rock;
 
     int height;
     int width;
     int _speed;
     DisplayMetrics metrics = new DisplayMetrics();
 
-
-
-    public static boolean in(int low, int high, int n) {
-        return n >= low && n <= high;
-    }
 
     public static boolean boundsY (ImageView pad, ImageView obj) {
         float aHalf = pad.getHeight()/2;
@@ -177,7 +172,7 @@ public class FullscreenActivity extends AppCompatActivity {
         @Override
         public void run() {
             if (hit_point == 0)
-                hit_point = getHitPoint(players[0]);
+                hit_point = getHitPoint(players[1]);
             players[1].setX(players[1].getX()+direction);
             if ((players[1].getX()+players[1].getWidth()) >= (width)-25) {
                 direction = -direction;
@@ -188,7 +183,7 @@ public class FullscreenActivity extends AppCompatActivity {
             }
             else
                 handler.postDelayed(this, direction);
-
+            // DAFUQ wrong with hitpoint
             if ((players[1].getX()) <= hit_point)
                 direction = -direction;
 
@@ -205,12 +200,36 @@ public class FullscreenActivity extends AppCompatActivity {
                 for (ImageView p : players) {
                     p.getDrawingRect(rect2);
                     if (Rect.intersects(rect1, rect2))
-                        handler.post(gen_rock_move(rock, (p == red)));
+                        handler.post(gen_rock_move(rock, (p == players[0])));
                 }
             }
-            // re-post this runnable
+            handler.post(this);
         }
     };
+
+    private Runnable score(final boolean p1wins){
+        return new Runnable() {
+            public void run(){
+                TextView board = p1wins ? board1 : board2;
+                board.setText(board.getText()+"X");
+            }
+        };
+    }
+
+    private Runnable gen_rock_fall(final ImageView rock){
+        return new Runnable() {
+            int speed = 1;
+            public void run(){
+                rock.setY(rock.getY()+speed);
+                speed += 1;
+                if (rock.getY() == height)
+                    handler.removeCallbacks(this);
+                else
+                    handler.postDelayed(this, 15);
+            }
+        };
+    }
+
 
     private Runnable gen_rock_move(final ImageView rock, final boolean right){
         return new Runnable() {
@@ -221,28 +240,15 @@ public class FullscreenActivity extends AppCompatActivity {
                 float cheto = rock.getX();
                 int chetoesche = width/2-rock.getWidth();
 
-                if (rock.getX() == width/2-rock.getWidth())
-                    /*             МОМЕНТ ПАДЕНИЯ
-                    * move.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(ObjectAnimator animation) {
-                        super.onAnimationEnd(animation);
-                        fall(rock);
-                    }
-
-                });*/
-
-                if ((rock.getX()+rock.getWidth()) >= (width)-25) {
+                float falling_point = 0;
+                if (rock.getX() == falling_point) {
                     direction = -direction;
                     rock.setX(rock.getX()+direction);
                     handler.removeCallbacks(this);
-                    handler.post(r2);
+                    handler.removeCallbacks(rock_check);
+                    handler.postDelayed(score(right),2000);
+                    handler.post(gen_rock_fall(rock));
                 }
-                else
-                    handler.postDelayed(this, direction);
-
-                if ((rock.getX()) <= width/2)
-                    direction = -direction;
             }
         };
     }
@@ -251,29 +257,6 @@ public class FullscreenActivity extends AppCompatActivity {
     public void R(View view) {
         handler.removeCallbacks(r1);
         left.setEnabled(false);
-  /*      ImageView[] rocks = new ImageView[] {rock1,rock2,rock3};
-        left.setEnabled(false);/*
-        ImageView[] rocks = new ImageView[] {rock1,rock2,rock3};
-        for (final ImageView rock : rocks) {
-            if (bounds(red,rock)) {
-                ObjectAnimator move = ObjectAnimator.ofFloat(rock, "translationX", +10f);
-                move.setDuration(1000);
-
-                move.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(ObjectAnimator animation) {
-                        super.onAnimationEnd(animation);
-                        fall(rock);
-                    }
-
-                });
-
-                move.setStartDelay(calc_flight());
-                if (move.getStartDelay() > 0)
-                    move.start();
-            }
-
-        }*/
         handler.post(r_hit);
     }
 
@@ -330,14 +313,16 @@ public class FullscreenActivity extends AppCompatActivity {
         };
 
         handler = new Handler();
-        gen_rock_move(rocks[0],true);
+        handler.post(gen_rock_move(rocks[0],true));
 
         players[0].setX(width/50);
         players[1].setX(width/30);
 
-
         left = (Button)findViewById(R.id.l);
         right = (Button)findViewById(R.id.r);
+
+        board1 = (TextView)findViewById(R.id.textView);
+        board2 = (TextView)findViewById(R.id.textView2);
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
